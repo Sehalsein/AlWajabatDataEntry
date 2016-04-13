@@ -1,15 +1,17 @@
 package com.alwajabat.alwajabatdataentry;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+
+import com.alwajabat.alwajabatdataentry.stepper.OnCancelAction;
+import com.alwajabat.alwajabatdataentry.stepper.OnFinishAction;
+import com.alwajabat.alwajabatdataentry.stepper.SteppersItem;
+import com.alwajabat.alwajabatdataentry.stepper.SteppersView;
 
 import java.util.ArrayList;
 
-import me.drozdzynski.library.steppers.OnCancelAction;
-import me.drozdzynski.library.steppers.OnFinishAction;
-import me.drozdzynski.library.steppers.SteppersItem;
-import me.drozdzynski.library.steppers.SteppersView;
+
 
 public class MainActivity extends AppCompatActivity {
 

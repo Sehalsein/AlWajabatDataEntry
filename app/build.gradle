@@ -40,7 +40,10 @@ repositories {
 
 
 dependencies {
-    compile 'me.drozdzynski.library.steppers:steppers:0.3.3-SNAPSHOT'
+
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.android.support:support-v4:23.1.1'
     compile 'com.github.quentin7b:android-location-tracker:3.2'
     compile 'com.squareup.retrofit2:retrofit:2.0.1'
     compile 'com.squareup.retrofit2:converter-gson:2.0.+'
