@@ -128,7 +128,7 @@ public class BasicDetailsFragment extends Fragment implements View.OnClickListen
                 mEmail = vEmail.getText().toString();
             }
 
-            //TODO CHANGED TO SPINNER DELETE IF NOT NEEDED LATER
+
             //AREA NAME
             /*if (isEmpty(vAreaName)) {
                 //  vAreaName.setError("Enter area name");
