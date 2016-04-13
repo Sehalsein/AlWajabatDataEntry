@@ -4,13 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.alwajabat.alwajabatdataentry.stepper.OnCancelAction;
-import com.alwajabat.alwajabatdataentry.stepper.OnFinishAction;
-import com.alwajabat.alwajabatdataentry.stepper.SteppersItem;
-import com.alwajabat.alwajabatdataentry.stepper.SteppersView;
 
 import java.util.ArrayList;
 
+import me.drozdzynski.library.steppers.OnCancelAction;
+import me.drozdzynski.library.steppers.OnFinishAction;
+import me.drozdzynski.library.steppers.SteppersItem;
+import me.drozdzynski.library.steppers.SteppersView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         stepFirst.setFragment(new BasicDetailsFragment(validate));
         stepTwo.setFragment(new RestaurantDetails());
         stepThree.setFragment(new AmmenetyDetails());
-        stepFirst.setPositiveButtonEnable(false);
+        stepFirst.setPositiveButtonEnable(true);
         stepTwo.setPositiveButtonEnable(true);
         stepThree.setPositiveButtonEnable(true);
 
