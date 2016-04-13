@@ -47,7 +47,6 @@ dependencies {
     compile 'com.github.quentin7b:android-location-tracker:3.2'
     compile 'com.squareup.retrofit2:retrofit:2.0.1'
     compile 'com.squareup.retrofit2:converter-gson:2.0.+'
-    compile 'com.code-troopers.betterpickers:library:2.5.3'
 }
 dependencies {
     compile 'com.android.support:support-v4:23.+'

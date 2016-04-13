@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     public SteppersItem stepFirst = new SteppersItem();
     public SteppersItem stepTwo = new SteppersItem();
+    public SteppersItem stepThree = new SteppersItem();
 
 
     @Override
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
 
-                Toast.makeText(getApplication(), "Completed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "Finished", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         stepTwo.setLabel("Step 2");
         stepTwo.setSubLabel("Secondary Details");
 
+        stepThree.setLabel("Step 3");
+        stepThree.setSubLabel("Amenities");
 
         Validate validate = new Validate() {
             @Override
@@ -72,11 +75,14 @@ public class MainActivity extends AppCompatActivity {
 
         stepFirst.setFragment(new BasicDetailsFragment(validate));
         stepTwo.setFragment(new RestaurantDetails());
-        stepFirst.setPositiveButtonEnable(true);
-        stepTwo.setPositiveButtonEnable(false);
+        stepThree.setFragment(new AmmenetyDetails());
+        stepFirst.setPositiveButtonEnable(false);
+        stepTwo.setPositiveButtonEnable(true);
+        stepThree.setPositiveButtonEnable(true);
 
         steps.add(stepFirst);
         steps.add(stepTwo);
+        steps.add(stepThree);
 
         SteppersView steppersView = (SteppersView) findViewById(R.id.steppersView);
         steppersView.setConfig(steppersViewConfig);
