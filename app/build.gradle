@@ -46,6 +46,8 @@ dependencies {
     compile project(':steppers')
     compile 'com.squareup.retrofit2:converter-gson:2.0.+'
     compile 'com.code-troopers.betterpickers:library:2.5.3'
+
+    compile 'com.github.akashandroid90.googlesupport:google-support-location:1.2'
 }
 dependencies {
     compile 'com.android.support:support-v4:23.+'
@@ -64,4 +66,7 @@ dependencies {
 }
 dependencies {
     compile 'com.android.support:design:23.+'
+}
+dependencies {
+    compile 'com.android.support:support-v4:23.+'
 }

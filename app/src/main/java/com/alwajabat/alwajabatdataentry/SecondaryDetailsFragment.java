@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RestaurantDetails extends Fragment implements MultiSelectionSpinner.OnMultipleItemsSelectedListener {
+public class SecondaryDetailsFragment extends Fragment implements MultiSelectionSpinner.OnMultipleItemsSelectedListener {
 
 
     CheckBox vDelivery;
@@ -33,7 +33,7 @@ public class RestaurantDetails extends Fragment implements MultiSelectionSpinner
     int closeTimeHours = -1, closeTimeMinutes = -1;
 
 
-    public RestaurantDetails() {
+    public SecondaryDetailsFragment() {
         // Required empty public constructor
     }
 

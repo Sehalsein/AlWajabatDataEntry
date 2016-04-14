@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,12 +16,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.github.akashandroid90.googlesupport.location.AppLocationFragment;
+
 import fr.quentinklein.slt.LocationTracker;
 import fr.quentinklein.slt.TrackerSettings;
 
 
-
-public class BasicDetailsFragment extends Fragment implements View.OnClickListener {
+public class PrimaryDetailsFragment extends AppLocationFragment implements View.OnClickListener {
 
     private Button vLocate, vValidate;
     private Spinner vAreaName;
@@ -30,10 +30,16 @@ public class BasicDetailsFragment extends Fragment implements View.OnClickListen
     private static final int PERMISSION_REQUEST_CODE = 1;
     private Validate validate;
 
-    public BasicDetailsFragment() {
+    public PrimaryDetailsFragment() {
     }
 
-    public BasicDetailsFragment(Validate validate) {
+    public void getBasicDetails(){
+
+    }
+
+
+
+    public PrimaryDetailsFragment(Validate validate) {
         this.validate = validate;
     }
 
@@ -57,11 +63,11 @@ public class BasicDetailsFragment extends Fragment implements View.OnClickListen
         vWebsite = (EditText) layout.findViewById(R.id.et_website);
         vValidate = (Button) layout.findViewById(R.id.btn_validate);
 
-        vLatitude.setEnabled(false);
-        vLongitude.setEnabled(false);
+              vLatitude.setEnabled(false);
+              vLongitude.setEnabled(false);
 
         vValidate.setOnClickListener(this);
-        vLocate.setOnClickListener(this);
+        //vLocate.setOnClickListener(this);
 
 
         return layout;
@@ -70,7 +76,6 @@ public class BasicDetailsFragment extends Fragment implements View.OnClickListen
     private void validate() {
 
         String mRestaurantName = null, mLatitude = null, mLongitude = null, mAddress = null, mMobile = null, mEmail = null, mAreaName = null;
-
 
         try {
             //LATITUDE
@@ -141,7 +146,6 @@ public class BasicDetailsFragment extends Fragment implements View.OnClickListen
         } catch (NullPointerException e) {
             Log.d("BasicDetailFragments", "Validate - null " + e.getMessage());
         }
-
         if (//mLatitude != null &&
             //  mLongitude != null &&
                 mRestaurantName != null &&
@@ -150,6 +154,7 @@ public class BasicDetailsFragment extends Fragment implements View.OnClickListen
                         // mAreaName != null &&
                         mMobile != null
                 ) {
+
             validate.onSuccess();
         }
     }
@@ -176,9 +181,9 @@ public class BasicDetailsFragment extends Fragment implements View.OnClickListen
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.btn_locate:
-                locate();
-                break;
+            //case R.id.btn_locate:
+            //  locate();
+            //break;
             case R.id.btn_validate:
                 validate();
                 break;
@@ -256,6 +261,15 @@ public class BasicDetailsFragment extends Fragment implements View.OnClickListen
     }
 
 
+    @Override
+    public void newLocation(Location location) {
+        vLongitude.setText(location.getLongitude()+"");
+        vLatitude.setText(location.getLatitude()+"");
+    }
 
-
+    @Override
+    public void myCurrentLocation(Location currentLocation) {
+        vLongitude.setText(currentLocation.getLongitude()+"");
+        vLatitude.setText(currentLocation.getLatitude()+"");
+    }
 }

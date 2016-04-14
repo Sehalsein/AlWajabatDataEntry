@@ -46,6 +46,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/LabelActive"
+            android:textStyle="bold"
+            android:textSize="20sp"
             tools:text="Main label of step" />
 
         <TextView
@@ -53,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/SubLabelActive"
+            android:textSize="16sp"
             tools:text="sub label of step" />
 
         <LinearLayout

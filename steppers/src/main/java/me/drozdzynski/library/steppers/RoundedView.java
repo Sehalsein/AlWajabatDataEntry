@@ -125,7 +125,7 @@ public class RoundedView extends View {
                 field.setAccessible(true);
                 return field.getInt(object);
             } catch (Exception e) {
-                // TODO: handle exception
+
             }
         }
         return 0;

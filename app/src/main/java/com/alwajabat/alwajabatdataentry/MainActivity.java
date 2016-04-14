@@ -1,9 +1,8 @@
 package com.alwajabat.alwajabatdataentry;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
-
 
 import java.util.ArrayList;
 
@@ -20,6 +19,12 @@ public class MainActivity extends AppCompatActivity {
 
     public SteppersItem stepFirst = new SteppersItem();
     public SteppersItem stepTwo = new SteppersItem();
+    public SteppersItem stepThree = new SteppersItem();
+
+    private PrimaryDetailsFragment primaryDetailsFragment;
+    private SecondaryDetailsFragment secondaryDetailsFragment;
+    private LocationFragment locationFragment =  new LocationFragment();
+
 
 
 
@@ -27,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         initView();
 
@@ -48,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancel() {
                 // Action when click cancel on one of steps
-                stepFirst.setPositiveButtonEnable(true);
-                Toast.makeText(getApplication(), "Cancel", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(getApplication(), "Back", Toast.LENGTH_SHORT).show();
             }
         });
         steppersViewConfig.setFragmentManager(getSupportFragmentManager());
@@ -62,6 +68,13 @@ public class MainActivity extends AppCompatActivity {
         stepTwo.setLabel("Step 2");
         stepTwo.setSubLabel("Secondary Details");
 
+        stepThree.setLabel("Step 3");
+        stepThree.setSubLabel("Location Details");
+
+
+
+
+
 
 
         Validate validate = new Validate() {
@@ -72,8 +85,12 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        stepFirst.setFragment(new BasicDetailsFragment(validate));
-        stepTwo.setFragment(new RestaurantDetails());
+       primaryDetailsFragment =  new PrimaryDetailsFragment(validate);
+        secondaryDetailsFragment = new SecondaryDetailsFragment();
+        stepFirst.setFragment(primaryDetailsFragment);
+        stepTwo.setFragment(secondaryDetailsFragment);
+        stepThree.setFragment(locationFragment);
+
 
         stepFirst.setPositiveButtonEnable(true);
         stepTwo.setPositiveButtonEnable(true);
@@ -81,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         steps.add(stepFirst);
         steps.add(stepTwo);
+
 
 
         SteppersView steppersView = (SteppersView) findViewById(R.id.steppersView);

@@ -85,12 +85,6 @@ public class SteppersAdapter extends RecyclerView.Adapter<SteppersViewHolder> {
     public void onBindViewHolder(final SteppersViewHolder holder, final int position) {
         final SteppersItem steppersItem = items.get(position);
 
-        if(position==0){
-            holder.buttonCancel.setVisibility(View.INVISIBLE);
-        }
-
-
-
         holder.setChecked(position < currentStep);
         if(holder.isChecked()) {
             holder.roundedView.setChecked(true);
@@ -133,10 +127,8 @@ public class SteppersAdapter extends RecyclerView.Adapter<SteppersViewHolder> {
             holder.buttonCancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "Fuck you library", Toast.LENGTH_LONG).show();
                     config.getOnCancelAction().onCancel();
                     previousStep();
-
                 }
             });
 
@@ -207,26 +199,28 @@ public class SteppersAdapter extends RecyclerView.Adapter<SteppersViewHolder> {
 
     private void nextStep() {
         this.removeStep = currentStep - 1 > -1 ? currentStep - 1 : currentStep;
-
         this.beforeStep = currentStep;
         this.currentStep = this.currentStep + 1;
-        Log.e("Library", "remove : "+removeStep+" before : "+beforeStep + "cureent  : "+ currentStep);
+       // Log.e("Library ADD", "remove : " + removeStep + " before : " + beforeStep + " current  : " + currentStep);
         notifyItemRangeChanged(removeStep, currentStep);
+
     }
 
     private void previousStep() {
-        if(this.currentStep > 0){
+
+        if (this.currentStep >= 0) {
             this.removeStep = currentStep;
             this.beforeStep = currentStep;
             this.currentStep = this.currentStep - 1;
-            Log.e("Library", "remove : "+removeStep+" before : "+beforeStep + "cureent  : "+ currentStep);
+           // Log.e("Library BACK", "remove : " + removeStep + " before : " + beforeStep + "cureent  : " + currentStep);
             notifyItemRangeChanged(removeStep, currentStep);
             notifyItemChanged(currentStep);
-        } else Toast.makeText(context,"Cant go back on this one", Toast.LENGTH_SHORT).show();
+            notifyItemChanged(this.beforeStep);
+
+        } else Toast.makeText(context, "Cant go back on this one", Toast.LENGTH_SHORT).show();
 
 
     }
-
 
 
     protected void setItems(List<SteppersItem> items) {
@@ -241,7 +235,7 @@ public class SteppersAdapter extends RecyclerView.Adapter<SteppersViewHolder> {
     private int fID = 87352142;
 
     public int findUnusedId(View view) {
-        while( view.findViewById(++fID) != null );
+        while (view.findViewById(++fID) != null) ;
         return fID;
     }
 
