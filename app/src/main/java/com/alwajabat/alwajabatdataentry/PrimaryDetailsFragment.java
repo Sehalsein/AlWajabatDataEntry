@@ -10,6 +10,8 @@ import android.support.v4.app.ActivityCompat;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +25,7 @@ import com.alwajabat.alwajabatdataentry.models.LocationModel;
 import com.google.android.gms.maps.model.LatLng;
 
 
-public class PrimaryDetailsFragment extends Fragment implements View.OnClickListener {
+public class PrimaryDetailsFragment extends Fragment implements View.OnClickListener, TextWatcher {
 
     private Button vLocate, vValidate;
     private Spinner vAreaName;
@@ -64,6 +66,11 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
         vAreaName = (Spinner) layout.findViewById(R.id.spin_area_name);
         vWebsite = (EditText) layout.findViewById(R.id.et_website);
         vValidate = (Button) layout.findViewById(R.id.btn_validate);
+
+        vRestaurantName.addTextChangedListener(this);
+        vHotelName.addTextChangedListener(this);
+        vAddress.addTextChangedListener(this);
+        vMobile.addTextChangedListener(this);
 
               vLatitude.setEnabled(false);
               vLongitude.setEnabled(false);
@@ -148,8 +155,8 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
         } catch (NullPointerException e) {
             Log.d("BasicDetailFragments", "Validate - null " + e.getMessage());
         }
-        if (//mLatitude != null &&
-            //  mLongitude != null &&
+        if (mLatitude != null &&
+              mLongitude != null &&
                 mRestaurantName != null &&
                         mAddress != null &&
                         mEmail != null &&
@@ -243,4 +250,18 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
     }
 
 
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        validate.onCancel();
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
 }

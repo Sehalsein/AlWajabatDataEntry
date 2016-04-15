@@ -77,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         Validate validate = new Validate() {
+
+            @Override
+            public void onCancel() {
+                stepFirst.setPositiveButtonEnable(false);
+            }
+
             @Override
             public void onSuccess() {
                 stepFirst.setPositiveButtonEnable(true);
@@ -91,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        stepFirst.setPositiveButtonEnable(true);
+        stepFirst.setPositiveButtonEnable(false);
         stepTwo.setPositiveButtonEnable(true);
 
 

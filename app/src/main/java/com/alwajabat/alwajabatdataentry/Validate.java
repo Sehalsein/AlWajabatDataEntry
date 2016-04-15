@@ -6,4 +6,6 @@ package com.alwajabat.alwajabatdataentry;
 public interface Validate {
 
     void onSuccess();
+
+    void onCancel();
 }
