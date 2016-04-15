@@ -27,7 +27,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class PrimaryDetailsFragment extends Fragment implements View.OnClickListener, TextWatcher {
 
-    private Button vLocate, vValidate;
+    private Button vLocate;
     private Spinner vAreaName;
     private EditText vLongitude, vLatitude, vRestaurantName, vHotelName, vMallName, vAddress, vEmail, vMobile, vWebsite;
     private static final int PERMISSION_REQUEST_CODE = 1;
@@ -65,17 +65,19 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
         vMobile = (EditText) layout.findViewById(R.id.et_mobile_no);
         vAreaName = (Spinner) layout.findViewById(R.id.spin_area_name);
         vWebsite = (EditText) layout.findViewById(R.id.et_website);
-        vValidate = (Button) layout.findViewById(R.id.btn_validate);
+
 
         vRestaurantName.addTextChangedListener(this);
         vHotelName.addTextChangedListener(this);
         vAddress.addTextChangedListener(this);
         vMobile.addTextChangedListener(this);
+        vLatitude.addTextChangedListener(this);
+        vLongitude.addTextChangedListener(this);
 
               vLatitude.setEnabled(false);
               vLongitude.setEnabled(false);
 
-        vValidate.setOnClickListener(this);
+
         vLocate.setOnClickListener(this);
 
 
@@ -89,7 +91,7 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
         try {
             //LATITUDE
             if (isEmpty(vLatitude)) {
-                vLatitude.setError("No Latitude");
+                //vLatitude.setError("No Latitude");
                 mLatitude = null;
             } else {
                 mLatitude = vLatitude.getText().toString();
@@ -97,7 +99,7 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
 
             //LONGITUDE
             if (isEmpty(vLongitude)) {
-                vLongitude.setError("No Longitude");
+                //vLongitude.setError("No Longitude");
                 mLongitude = null;
             } else {
                 mLongitude = vLongitude.getText().toString();
@@ -258,6 +260,7 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         validate.onCancel();
+        validate();
     }
 
     @Override
