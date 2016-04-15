@@ -2,10 +2,13 @@ package com.alwajabat.alwajabatdataentry;
 
 
 import android.Manifest;
+import android.app.FragmentManager;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,19 +19,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.github.akashandroid90.googlesupport.location.AppLocationFragment;
-
-import fr.quentinklein.slt.LocationTracker;
-import fr.quentinklein.slt.TrackerSettings;
+import com.alwajabat.alwajabatdataentry.models.LocationModel;
+import com.google.android.gms.maps.model.LatLng;
 
 
-public class PrimaryDetailsFragment extends AppLocationFragment implements View.OnClickListener {
+public class PrimaryDetailsFragment extends Fragment implements View.OnClickListener {
 
     private Button vLocate, vValidate;
     private Spinner vAreaName;
     private EditText vLongitude, vLatitude, vRestaurantName, vHotelName, vMallName, vAddress, vEmail, vMobile, vWebsite;
     private static final int PERMISSION_REQUEST_CODE = 1;
     private Validate validate;
+
 
     public PrimaryDetailsFragment() {
     }
@@ -67,7 +69,7 @@ public class PrimaryDetailsFragment extends AppLocationFragment implements View.
               vLongitude.setEnabled(false);
 
         vValidate.setOnClickListener(this);
-        //vLocate.setOnClickListener(this);
+        vLocate.setOnClickListener(this);
 
 
         return layout;
@@ -181,9 +183,24 @@ public class PrimaryDetailsFragment extends AppLocationFragment implements View.
     public void onClick(View v) {
 
         switch (v.getId()) {
-            //case R.id.btn_locate:
-            //  locate();
-            //break;
+            case R.id.btn_locate:
+              //Open the dialog fragment here
+
+
+                FragmentManager fm = getActivity().getFragmentManager();
+                PickMapFragment mapFragment =  new PickMapFragment(new OnLocationSet(){
+
+                    @Override
+                    public void success(LatLng model) {
+                        vLatitude.setText(model.latitude+"");
+                        vLongitude.setText(model.longitude+"");
+
+                        Log.e("LOCATION", model.latitude+","+model.longitude);
+                    }
+                });
+                mapFragment.show(fm, "Pick Location");
+
+            break;
             case R.id.btn_validate:
                 validate();
                 break;
@@ -193,42 +210,7 @@ public class PrimaryDetailsFragment extends AppLocationFragment implements View.
 
     }
 
-    private void locate() {
 
-        if (!checkPermission()) {
-
-            requestPermission();
-
-        } else {
-
-            Toast.makeText(getActivity(), "Permission already granted", Toast.LENGTH_LONG).show();
-
-            LocationTracker tracker = new LocationTracker(
-                    getActivity(),
-                    new TrackerSettings()
-                            .setUseGPS(true)
-                            .setUseNetwork(false)
-                            .setUsePassive(false)
-            ) {
-
-                @Override
-                public void onLocationFound(Location location) {
-                    // Do some stuff when a new GPS Location has been found
-                    vLatitude.setText(location.getLatitude() + "");
-                    vLongitude.setText(location.getLongitude() + "");
-                }
-
-                @Override
-                public void onTimeout() {
-                    Toast.makeText(getActivity(), "Timeout", Toast.LENGTH_SHORT).show();
-                }
-            };
-            Toast.makeText(getActivity(), "Finding", Toast.LENGTH_SHORT).show();
-            tracker.startListening();
-
-        }
-
-    }
 
     private boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION);
@@ -261,15 +243,4 @@ public class PrimaryDetailsFragment extends AppLocationFragment implements View.
     }
 
 
-    @Override
-    public void newLocation(Location location) {
-        vLongitude.setText(location.getLongitude()+"");
-        vLatitude.setText(location.getLatitude()+"");
-    }
-
-    @Override
-    public void myCurrentLocation(Location currentLocation) {
-        vLongitude.setText(currentLocation.getLongitude()+"");
-        vLatitude.setText(currentLocation.getLatitude()+"");
-    }
 }

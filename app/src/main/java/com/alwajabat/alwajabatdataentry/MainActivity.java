@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private PrimaryDetailsFragment primaryDetailsFragment;
     private SecondaryDetailsFragment secondaryDetailsFragment;
-    private LocationFragment locationFragment =  new LocationFragment();
+
 
 
 
@@ -68,8 +68,7 @@ public class MainActivity extends AppCompatActivity {
         stepTwo.setLabel("Step 2");
         stepTwo.setSubLabel("Secondary Details");
 
-        stepThree.setLabel("Step 3");
-        stepThree.setSubLabel("Location Details");
+
 
 
 
@@ -89,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         secondaryDetailsFragment = new SecondaryDetailsFragment();
         stepFirst.setFragment(primaryDetailsFragment);
         stepTwo.setFragment(secondaryDetailsFragment);
-        stepThree.setFragment(locationFragment);
+
 
 
         stepFirst.setPositiveButtonEnable(true);

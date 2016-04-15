@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.alwajabat.alwajabatdataentry.CustomMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <include
+        android:id="@+id/marker_view_incl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/marker_view" />
+
+    <include
+        android:id="@+id/location_display_incl"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="7dp"
+        layout="@layout/location_display_view" />
+
+    <Button
+        android:id="@+id/setLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SET"
+        android:textColor="#fff"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorAccent"/>
+
+</RelativeLayout>

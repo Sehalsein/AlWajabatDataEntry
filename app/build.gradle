@@ -46,6 +46,8 @@ dependencies {
     compile project(':steppers')
     compile 'com.squareup.retrofit2:converter-gson:2.0.+'
     compile 'com.code-troopers.betterpickers:library:2.5.3'
+    compile 'com.google.android.gms:play-services-maps:8.3.0'
+
 
     compile 'com.github.akashandroid90.googlesupport:google-support-location:1.2'
 }
