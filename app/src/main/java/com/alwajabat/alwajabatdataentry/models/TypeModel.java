@@ -1,9 +1,13 @@
 package com.alwajabat.alwajabatdataentry.models;
 
+import java.io.Serializable;
+
 /**
  * Created by sehalsein on 14/04/16.
  */
-public class TypeModel {
+
+@SuppressWarnings("serial")
+public class TypeModel implements Serializable {
     private String id;
     private String name;
 

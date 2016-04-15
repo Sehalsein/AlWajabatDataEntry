@@ -1,9 +1,13 @@
 package com.alwajabat.alwajabatdataentry.models;
 
+import java.io.Serializable;
+
 /**
  * Created by sehalsein on 14/04/16.
  */
-public class AmmenitityModel {
+
+@SuppressWarnings("serial")
+public class AmmenitityModel implements Serializable {
 
     private String id;
     private String name;

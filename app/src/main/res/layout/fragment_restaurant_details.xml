@@ -15,6 +15,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Select Cusine"/>
+        <TextView
+            android:id="@+id/err_cuisine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Atleast One Cuisine"
+            android:textStyle="bold"
+            android:textColor="@color/bpDarker_red"
+            android:visibility="gone"
+            />
         <com.alwajabat.alwajabatdataentry.MultiSelectionSpinner
             android:id="@+id/spinner_cusine"
             android:layout_width="match_parent"
@@ -24,12 +33,32 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Paymetn Methods"/>
+            android:text="Select Payment Methods"/>
+        <TextView
+            android:id="@+id/err_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Atleast One Mode of Payment"
+            android:textStyle="bold"
+            android:textColor="@color/bpDarker_red"
+            android:visibility="gone"
+            />
+
         <com.alwajabat.alwajabatdataentry.MultiSelectionSpinner
             android:id="@+id/spinner_payment_method"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:id="@+id/err_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Atleast One Type"
+            android:textStyle="bold"
+            android:textColor="@color/bpDarker_red"
+            android:visibility="gone"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -67,7 +96,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Cost for two"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:singleLine="true" />
 
@@ -98,7 +127,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Min order amount"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:singleLine="true" />
 
@@ -115,7 +144,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Delivery Charge"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:singleLine="true" />
 
@@ -128,6 +157,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Working Hours"/>
+        <TextView
+            android:id="@+id/err_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Appropraite Timings"
+            android:textStyle="bold"
+            android:textColor="@color/bpDarker_red"
+            android:visibility="gone"
+            />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -158,11 +197,7 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_validate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Validate"/>
+
 
 
     </LinearLayout>

@@ -1,8 +1,11 @@
 package com.alwajabat.alwajabatdataentry;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+
+import com.alwajabat.alwajabatdataentry.models.ConfirmationActivity;
 
 import java.util.ArrayList;
 
@@ -19,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
     public SteppersItem stepFirst = new SteppersItem();
     public SteppersItem stepTwo = new SteppersItem();
-    public SteppersItem stepThree = new SteppersItem();
 
     private PrimaryDetailsFragment primaryDetailsFragment;
     private SecondaryDetailsFragment secondaryDetailsFragment;
@@ -46,7 +48,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
 
-                Toast.makeText(getApplication(), "Finished", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(getApplication(), "Finished "+secondaryDetailsFragment.getModel().getRestaurantType().toArray().length, Toast.LENGTH_SHORT).show();
+
+                Intent intent =  new Intent(MainActivity.this, ConfirmationActivity.class);
+                intent.putExtra("primary_details", primaryDetailsFragment.getBasicDetails());
+                intent.putExtra("secondary_details", secondaryDetailsFragment.getModel());
+                startActivity(intent);
             }
         });
 
@@ -76,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Validate validate = new Validate() {
+        Validate validatePrimary = new Validate() {
 
             @Override
             public void onCancel() {
@@ -90,15 +98,33 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-       primaryDetailsFragment =  new PrimaryDetailsFragment(validate);
-        secondaryDetailsFragment = new SecondaryDetailsFragment();
+        Validate validateSecondary = new Validate() {
+
+            @Override
+            public void onCancel() {
+                stepTwo.setPositiveButtonEnable(false);
+            }
+
+            @Override
+            public void onSuccess() {
+                stepTwo.setPositiveButtonEnable(true);
+                Toast.makeText(MainActivity.this, "Secondary Validation complete", Toast.LENGTH_SHORT).show();
+            }
+        };
+
+
+
+        primaryDetailsFragment =  new PrimaryDetailsFragment(validatePrimary);
+
+
+        secondaryDetailsFragment = new SecondaryDetailsFragment(validateSecondary);
         stepFirst.setFragment(primaryDetailsFragment);
         stepTwo.setFragment(secondaryDetailsFragment);
 
 
 
         stepFirst.setPositiveButtonEnable(false);
-        stepTwo.setPositiveButtonEnable(true);
+        stepTwo.setPositiveButtonEnable(false);
 
 
         steps.add(stepFirst);

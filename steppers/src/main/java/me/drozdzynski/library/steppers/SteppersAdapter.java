@@ -85,6 +85,12 @@ public class SteppersAdapter extends RecyclerView.Adapter<SteppersViewHolder> {
     public void onBindViewHolder(final SteppersViewHolder holder, final int position) {
         final SteppersItem steppersItem = items.get(position);
 
+        if(position==0){
+            holder.buttonCancel.setVisibility(View.INVISIBLE);
+        }
+        else{
+            holder.buttonCancel.setVisibility(View.VISIBLE);
+        }
         holder.setChecked(position < currentStep);
         if(holder.isChecked()) {
             holder.roundedView.setChecked(true);

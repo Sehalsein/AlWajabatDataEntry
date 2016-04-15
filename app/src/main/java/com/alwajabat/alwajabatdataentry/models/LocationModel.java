@@ -1,9 +1,13 @@
 package com.alwajabat.alwajabatdataentry.models;
 
+import java.io.Serializable;
+
 /**
  * Created by sehalsein on 14/04/16.
  */
-public class LocationModel {
+
+@SuppressWarnings("serial")
+public class LocationModel implements Serializable {
 
     private String lattitude;
     private String longitude;

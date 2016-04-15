@@ -1,16 +1,20 @@
 package com.alwajabat.alwajabatdataentry.models;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by sehalsein on 14/04/16.
  */
-public class SecondaryModel {
 
-    private List<CuisineModel>  cuisines;
-    private List<PaymentModel>  paymentModes;
-    private List<TypeModel>     restaurantType;
-    private List<AmmenitityModel> ammenities;
+@SuppressWarnings("serial")
+public class SecondaryModel implements Serializable {
+
+    private List<CuisineModel>  cuisines =  new ArrayList<>();
+    private List<PaymentModel>  paymentModes=  new ArrayList<>();
+    private List<TypeModel>     restaurantType=  new ArrayList<>();
+    private List<AmmenitityModel> ammenities=  new ArrayList<>();
     private boolean delivery;
     private float costForTwo;
     private float minimumOrder;

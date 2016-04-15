@@ -21,8 +21,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.alwajabat.alwajabatdataentry.models.LocationModel;
+import com.alwajabat.alwajabatdataentry.models.AreaModel;
+import com.alwajabat.alwajabatdataentry.models.PrimaryModel;
 import com.google.android.gms.maps.model.LatLng;
+
+import java.util.List;
 
 
 public class PrimaryDetailsFragment extends Fragment implements View.OnClickListener, TextWatcher {
@@ -34,12 +37,18 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
     private Validate validate;
 
 
+
+
+    private PrimaryModel model = new PrimaryModel();
+
+
     public PrimaryDetailsFragment() {
     }
 
-    public void getBasicDetails(){
-
+    public PrimaryModel getBasicDetails(){
+        return model;
     }
+
 
 
 
@@ -81,6 +90,7 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
         vLocate.setOnClickListener(this);
 
 
+
         return layout;
     }
 
@@ -95,6 +105,9 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
                 mLatitude = null;
             } else {
                 mLatitude = vLatitude.getText().toString();
+                model.getLocationModel().setLattitude(vLatitude.getText().toString());
+
+
             }
 
             //LONGITUDE
@@ -103,6 +116,7 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
                 mLongitude = null;
             } else {
                 mLongitude = vLongitude.getText().toString();
+                model.getLocationModel().setLongitude(vLongitude.getText().toString());
             }
 
             //RESTAURANT NAME
@@ -111,6 +125,9 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
                 mRestaurantName = null;
             } else {
                 mRestaurantName = vRestaurantName.getText().toString();
+                model.setRestaurantName(vRestaurantName.getText().toString());
+                Log.e("ERRRR",vRestaurantName.getText().toString() );
+
             }
 
             //ADDRESS
@@ -119,6 +136,7 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
                 mAddress = null;
             } else {
                 mAddress = vAddress.getText().toString();
+                model.setHumanAddress(vAddress.getText().toString());
             }
 
             //MOBILE NUMBER
@@ -130,21 +148,39 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
                 mMobile = null;
             } else {
                 mMobile = vMobile.getText().toString();
+                model.setPhoneNumber("+971-"+vMobile.getText().toString());
             }
 
             //EMAIL ID
             if (!isEmpty(vEmail)) {
                 if (!isValidEmail(vEmail.getText())) {
-                    vEmail.setError("Enter valid emailid");
+                    vEmail.setError("Enter Valid Email ID");
                     mEmail = null;
                 } else {
                     mEmail = vEmail.getText().toString();
                 }
             } else if (isEmpty(vEmail)) {
                 mEmail = vEmail.getText().toString();
+
+
+                model.setEmail(vEmail.getText().toString());
+            }
+
+            if(!isEmpty(vWebsite)){
+                model.setWebsite(vWebsite.getText().toString());
+            }
+
+            if(!isEmpty(vMallName)){
+                model.setMallName(vMallName.getText().toString());
+            }
+
+            if(!isEmpty(vHotelName)){
+                model.setHotelName(vHotelName.getText().toString());
             }
 
 
+
+            //TODO Deal with area in primary fragment
             //AREA NAME
             /*if (isEmpty(vAreaName)) {
                 //  vAreaName.setError("Enter area name");
@@ -194,8 +230,6 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_locate:
               //Open the dialog fragment here
-
-
                 FragmentManager fm = getActivity().getFragmentManager();
                 PickMapFragment mapFragment =  new PickMapFragment(new OnLocationSet(){
 
@@ -207,13 +241,11 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
                         Log.e("LOCATION", model.latitude+","+model.longitude);
                     }
                 });
+
+
                 mapFragment.show(fm, "Pick Location");
 
             break;
-            case R.id.btn_validate:
-                validate();
-                break;
-
 
         }
 
@@ -261,6 +293,7 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         validate.onCancel();
         validate();
+
     }
 
     @Override

@@ -1,11 +1,16 @@
 package com.alwajabat.alwajabatdataentry.models;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by sehalsein on 14/04/16.
  */
-public class PrimaryModel {
+
+@SuppressWarnings("serial")
+public class PrimaryModel implements Serializable {
+    
     private String restaurantName;
     private String hotelName;
     private String mallName;
@@ -13,14 +18,10 @@ public class PrimaryModel {
     private String email;
     private String website;
     private String phoneNumber;
-    private List<AreaModel> areas;
+    private AreaModel area;
+    private LocationModel locationModel = new LocationModel();
 
-    public PrimaryModel() {
-    }
-
-
-    public PrimaryModel(String restaurantName, String hotelName, String mallName,
-                        String humanAddress, String email, String website, String phoneNumber, List<AreaModel> areas) {
+    public PrimaryModel(String restaurantName, String hotelName, String mallName, String humanAddress, String email, String website, String phoneNumber, AreaModel area, LocationModel locationModel) {
         this.restaurantName = restaurantName;
         this.hotelName = hotelName;
         this.mallName = mallName;
@@ -28,15 +29,37 @@ public class PrimaryModel {
         this.email = email;
         this.website = website;
         this.phoneNumber = phoneNumber;
-        this.areas = areas;
+        this.area = area;
+        this.locationModel = locationModel;
     }
 
-    public List<AreaModel> getAreas() {
-        return areas;
+    public PrimaryModel() {
+        this.restaurantName =
+        this.hotelName =
+        this.mallName =
+        this.humanAddress =
+        this.email =
+        this.website = this.phoneNumber = "";
+
     }
 
-    public void setAreas(List<AreaModel> areas) {
-        this.areas = areas;
+
+    public LocationModel getLocationModel() {
+        return locationModel;
+    }
+
+    public void setLocationModel(LocationModel locationModel) {
+        this.locationModel = locationModel;
+    }
+
+
+
+    public AreaModel getArea() {
+        return area;
+    }
+
+    public void setArea(AreaModel area) {
+        this.area = area;
     }
 
     public String getRestaurantName() {
