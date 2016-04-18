@@ -1,6 +1,5 @@
 package com.alwajabat.alwajabatdataentry;
 
-import com.alwajabat.alwajabatdataentry.models.LocationModel;
 import com.google.android.gms.maps.model.LatLng;
 
 /**

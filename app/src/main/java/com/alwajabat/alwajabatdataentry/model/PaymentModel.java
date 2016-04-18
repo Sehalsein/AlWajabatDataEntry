@@ -1,4 +1,4 @@
-package com.alwajabat.alwajabatdataentry.models;
+package com.alwajabat.alwajabatdataentry.model;
 
 import java.io.Serializable;
 
@@ -7,17 +7,17 @@ import java.io.Serializable;
  */
 
 @SuppressWarnings("serial")
-public class AmmenitityModel implements Serializable {
+public class PaymentModel implements Serializable {
 
     private String id;
     private String name;
 
-    public AmmenitityModel(String id, String name) {
+    public PaymentModel(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public AmmenitityModel() {
+    public PaymentModel() {
     }
 
     public String getId() {

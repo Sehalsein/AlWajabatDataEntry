@@ -4,7 +4,6 @@ package com.alwajabat.alwajabatdataentry;
 import android.Manifest;
 import android.app.FragmentManager;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 
@@ -21,11 +20,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.alwajabat.alwajabatdataentry.models.AreaModel;
-import com.alwajabat.alwajabatdataentry.models.PrimaryModel;
+import com.alwajabat.alwajabatdataentry.model.PrimaryModel;
 import com.google.android.gms.maps.model.LatLng;
-
-import java.util.List;
 
 
 public class PrimaryDetailsFragment extends Fragment implements View.OnClickListener, TextWatcher {

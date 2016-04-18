@@ -1,4 +1,4 @@
-package com.alwajabat.alwajabatdataentry.models;
+package com.alwajabat.alwajabatdataentry.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;

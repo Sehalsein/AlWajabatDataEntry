@@ -1,10 +1,13 @@
-package com.alwajabat.alwajabatdataentry.models;
+package com.alwajabat.alwajabatdataentry;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.alwajabat.alwajabatdataentry.R;
+import com.alwajabat.alwajabatdataentry.model.CuisineModel;
+import com.alwajabat.alwajabatdataentry.model.PrimaryModel;
+import com.alwajabat.alwajabatdataentry.model.SecondaryModel;
 
 
 public class ConfirmationActivity extends AppCompatActivity {

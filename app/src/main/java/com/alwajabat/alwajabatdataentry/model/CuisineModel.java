@@ -1,4 +1,6 @@
-package com.alwajabat.alwajabatdataentry.models;
+package com.alwajabat.alwajabatdataentry.model;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
@@ -9,7 +11,10 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class CuisineModel implements Serializable {
 
+    @SerializedName("_id")
     private String id;
+
+    @SerializedName("name")
     private String name;
 
     public CuisineModel(String id, String name) {

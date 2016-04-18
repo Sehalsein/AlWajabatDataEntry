@@ -1,4 +1,4 @@
-package com.alwajabat.alwajabatdataentry.models;
+package com.alwajabat.alwajabatdataentry.model;
 
 /**
  * Created by deezdroid on 15/04/16.

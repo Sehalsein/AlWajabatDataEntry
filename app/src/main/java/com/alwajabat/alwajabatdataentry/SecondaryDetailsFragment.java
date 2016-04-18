@@ -5,22 +5,19 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.alwajabat.alwajabatdataentry.models.AmmenitityModel;
-import com.alwajabat.alwajabatdataentry.models.CuisineModel;
-import com.alwajabat.alwajabatdataentry.models.PaymentModel;
-import com.alwajabat.alwajabatdataentry.models.SecondaryModel;
-import com.alwajabat.alwajabatdataentry.models.TypeModel;
+import com.alwajabat.alwajabatdataentry.model.AmmenitityModel;
+import com.alwajabat.alwajabatdataentry.model.CuisineModel;
+import com.alwajabat.alwajabatdataentry.model.PaymentModel;
+import com.alwajabat.alwajabatdataentry.model.SecondaryModel;
+import com.alwajabat.alwajabatdataentry.model.TypeModel;
 import com.codetroopers.betterpickers.radialtimepicker.RadialTimePickerDialogFragment;
 
 import java.util.List;
@@ -123,7 +120,7 @@ public class SecondaryDetailsFragment extends Fragment implements MultiSelection
                         .setOnTimeSetListener(new RadialTimePickerDialogFragment.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(RadialTimePickerDialogFragment dialog, int hourOfDay, int minute) {
-                                Toast.makeText(getActivity(), "Restaurant opens at " + hourOfDay + " : " + minute, Toast.LENGTH_SHORT).show();
+
                                 vOpenTime.setText(hourOfDay + " : " + minute);
                                 openTimeHours = hourOfDay;
                                 openTimeMinutes = minute;
@@ -147,7 +144,7 @@ public class SecondaryDetailsFragment extends Fragment implements MultiSelection
                         .setOnTimeSetListener(new RadialTimePickerDialogFragment.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(RadialTimePickerDialogFragment dialog, int hourOfDay, int minute) {
-                                Toast.makeText(getActivity(), "Restaurant closes at " + hourOfDay + " : " + minute, Toast.LENGTH_SHORT).show();
+
                                 vCloseTime.setText(hourOfDay + " : " + minute);
                                 closeTimeHours = hourOfDay;
                                 closeTimeMinutes = minute;

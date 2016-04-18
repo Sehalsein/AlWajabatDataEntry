@@ -1,4 +1,4 @@
-package com.alwajabat.alwajabatdataentry.models;
+package com.alwajabat.alwajabatdataentry.model;
 
 import java.io.Serializable;
 
@@ -7,16 +7,17 @@ import java.io.Serializable;
  */
 
 @SuppressWarnings("serial")
-public class TypeModel implements Serializable {
+public class AmmenitityModel implements Serializable {
+
     private String id;
     private String name;
 
-    public TypeModel() {
-    }
-
-    public TypeModel(String id, String name) {
+    public AmmenitityModel(String id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public AmmenitityModel() {
     }
 
     public String getId() {

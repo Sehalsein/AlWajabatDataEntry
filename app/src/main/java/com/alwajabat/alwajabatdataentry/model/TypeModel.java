@@ -1,4 +1,4 @@
-package com.alwajabat.alwajabatdataentry.models;
+package com.alwajabat.alwajabatdataentry.model;
 
 import java.io.Serializable;
 
@@ -7,17 +7,16 @@ import java.io.Serializable;
  */
 
 @SuppressWarnings("serial")
-public class AreaModel implements Serializable {
-
+public class TypeModel implements Serializable {
     private String id;
     private String name;
 
-    public AreaModel(String id, String name) {
-        this.id = id;
-        this.name = name;
+    public TypeModel() {
     }
 
-    public AreaModel() {
+    public TypeModel(String id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public String getId() {

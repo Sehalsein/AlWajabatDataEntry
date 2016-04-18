@@ -42,13 +42,14 @@ repositories {
 dependencies {
 
     compile 'com.github.quentin7b:android-location-tracker:3.2'
-    compile 'com.squareup.retrofit2:retrofit:2.0.1'
     compile project(':steppers')
-    compile 'com.squareup.retrofit2:converter-gson:2.0.+'
     compile 'com.code-troopers.betterpickers:library:2.5.3'
     compile 'com.google.android.gms:play-services-maps:8.3.0'
-
-
+    compile 'com.android.support:recyclerview-v7:23.0.+'
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.squareup.retrofit2:retrofit:2.0.1'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.1'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.github.akashandroid90.googlesupport:google-support-location:1.2'
 }
 dependencies {
@@ -72,3 +73,4 @@ dependencies {
 dependencies {
     compile 'com.android.support:support-v4:23.+'
 }
+

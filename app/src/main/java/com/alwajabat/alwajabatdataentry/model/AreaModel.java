@@ -1,4 +1,6 @@
-package com.alwajabat.alwajabatdataentry.models;
+package com.alwajabat.alwajabatdataentry.model;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
@@ -7,17 +9,20 @@ import java.io.Serializable;
  */
 
 @SuppressWarnings("serial")
-public class PaymentModel implements Serializable {
+public class AreaModel implements Serializable {
 
+    @SerializedName("_id")
     private String id;
+
+    @SerializedName("name")
     private String name;
 
-    public PaymentModel(String id, String name) {
+    public AreaModel(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public PaymentModel() {
+    public AreaModel() {
     }
 
     public String getId() {
