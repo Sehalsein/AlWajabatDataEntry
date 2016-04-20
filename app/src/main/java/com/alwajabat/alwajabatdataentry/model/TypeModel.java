@@ -1,5 +1,7 @@
 package com.alwajabat.alwajabatdataentry.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,8 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class TypeModel implements Serializable {
+
+    @SerializedName("_id")
     private String id;
     private String name;
 

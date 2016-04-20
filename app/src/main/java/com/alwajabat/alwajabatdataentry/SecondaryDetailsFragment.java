@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,10 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alwajabat.alwajabatdataentry.api.APIAdapter;
+import com.alwajabat.alwajabatdataentry.api.callback.APIResponseCallback;
 import com.alwajabat.alwajabatdataentry.model.AmmenitityModel;
 import com.alwajabat.alwajabatdataentry.model.CuisineModel;
 import com.alwajabat.alwajabatdataentry.model.PaymentModel;
@@ -20,7 +24,10 @@ import com.alwajabat.alwajabatdataentry.model.SecondaryModel;
 import com.alwajabat.alwajabatdataentry.model.TypeModel;
 import com.codetroopers.betterpickers.radialtimepicker.RadialTimePickerDialogFragment;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Response;
 
 
 /**
@@ -37,6 +44,8 @@ public class SecondaryDetailsFragment extends Fragment implements MultiSelection
     private TextView errCuisine, errType, errPayment, errTime;
     private Validate validate;
 
+    private APIAdapter adapter;
+
 
 
     int openTimeHours = -1, openTimeMinutes = -1;
@@ -47,6 +56,7 @@ public class SecondaryDetailsFragment extends Fragment implements MultiSelection
 
     public SecondaryDetailsFragment(Validate validate) {
         this.validate = validate;
+        this.adapter = new APIAdapter();
     }
 
 
@@ -55,28 +65,34 @@ public class SecondaryDetailsFragment extends Fragment implements MultiSelection
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_restaurant_details, container, false);
-
-        String[] arrayCusine = {"Arabic", "Indian", "Mexican", "Chineese", "Fast Food", "Italian", "labaneese", "Continantal", "Spanish"};
         vCuisine = (MultiSelectionSpinner) layout.findViewById(R.id.spinner_cusine);
+        String[] arrayCusine = {""};
         vCuisine.setItems(arrayCusine);
         vCuisine.setListener(this);
+
+        loadCuisines();
+
 
         String[] arrayPayment = {"Debit Card", "Credit Card", "Cash", "Cheque"};
          vPayment = (MultiSelectionSpinner) layout.findViewById(R.id.spinner_payment_method);
         vPayment.setItems(arrayPayment);
-        vPayment.setSelection(2);
         vPayment.setListener(this);
+        loadPaymentTypes();
 
-        String[] arrayType = {"Breakfast", "Lunch", "Snacks", "Dinner"};
+        String[] arrayType = {""};
          vType = (MultiSelectionSpinner) layout.findViewById(R.id.spinner_restaurant_type);
         vType.setItems(arrayType);
         vType.setListener(this);
 
-        String[] arrayAmmenity = {"Halal", "WiFi", "Outdoor Seating", "Parking", "Valet Parking", "Smoking Area", "Indoor Smoking",
-                "Play Area", "Take Away", "Wheel Chair Accessible", "Alcohol", "Sports Screen"};
+        loadTypes();
+
+        String[] arrayAmmenity = {""};
+
+
          vAmmenity = (MultiSelectionSpinner) layout.findViewById(R.id.spinner_amenity);
         vAmmenity.setItems(arrayAmmenity);
         vAmmenity.setListener(this);
+        loadAmenities();
 
         vDelivery = (CheckBox) layout.findViewById(R.id.cb_delivery);
         vMinOrder = (EditText) layout.findViewById(R.id.et_min_order);
@@ -346,4 +362,115 @@ public class SecondaryDetailsFragment extends Fragment implements MultiSelection
     public SecondaryModel getModel(){
         return model;
     }
+
+
+    public void loadCuisines(){
+
+        adapter.getCuisine(new APIResponseCallback() {
+            @Override
+            public void onSuccess(Response response) {
+                Response<List<CuisineModel>> cuisines = response;
+                List<String> titles =  new ArrayList<String>();
+                for(CuisineModel cuisine : cuisines.body()){
+
+                    titles.add(cuisine.getName());
+                }
+
+
+
+                vCuisine.setItems(titles);
+                vCuisine.setSelection(new String[]{});
+                validate();
+
+
+
+            }
+
+            @Override
+            public void onFailure(String error) {
+                Log.e("Res Err", error);
+            }
+        });
+    }
+
+    public void loadAmenities(){
+
+        adapter.getAmenities(new APIResponseCallback() {
+            @Override
+            public void onSuccess(Response response) {
+                Response<List<AmmenitityModel>> amenities = response;
+                List<String> titles =  new ArrayList<String>();
+                for(AmmenitityModel amenity : amenities.body()){
+                    titles.add(amenity.getName());
+                }
+
+                    vAmmenity.setItems(titles);
+                    vAmmenity.setSelection(new String[]{});
+                    validate();
+
+            }
+
+            @Override
+            public void onFailure(String error) {
+                Log.e("Res Err", error);
+
+            }
+        });
+    }
+
+
+    public void loadTypes(){
+
+        adapter.getTypes(new APIResponseCallback() {
+            @Override
+            public void onSuccess(Response response) {
+                Response<List<TypeModel>> types = response;
+                List<String> titles =  new ArrayList<String>();
+                for(TypeModel type : types.body()){
+                    Log.e("Type", type.getId() + "\t" + type.getName());
+                    titles.add(type.getName());
+                }
+
+                vType.setItems(titles);
+                vType.setSelection(new String[]{});
+                validate();
+
+
+            }
+
+            @Override
+            public void onFailure(String error) {
+                Log.e("Res Err", error);
+
+            }
+        });
+    }
+
+    public void loadPaymentTypes(){
+
+        adapter.getPaymentType(new APIResponseCallback() {
+            @Override
+            public void onSuccess(Response response) {
+                Response<List<PaymentModel>> types = response;
+                List<String> titles =  new ArrayList<String>();
+                for(PaymentModel type : types.body()){
+                    Log.e("PaymentModel", type.getId() + "\t" + type.getName());
+                    titles.add(type.getName());
+                }
+
+                vPayment.setItems(titles);
+                vPayment.setSelection(new String[]{});
+                validate();
+
+
+
+            }
+
+            @Override
+            public void onFailure(String error) {
+                Log.e("Res Err", error);
+            }
+        });
+    }
+
 }

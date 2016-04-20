@@ -1,7 +1,10 @@
 package com.alwajabat.alwajabatdataentry.api;
 
+import com.alwajabat.alwajabatdataentry.model.AmmenitityModel;
 import com.alwajabat.alwajabatdataentry.model.AreaModel;
 import com.alwajabat.alwajabatdataentry.model.CuisineModel;
+import com.alwajabat.alwajabatdataentry.model.PaymentModel;
+import com.alwajabat.alwajabatdataentry.model.TypeModel;
 
 import java.util.List;
 
@@ -28,7 +31,23 @@ public interface EndPoints {
     @GET("area")
     Call<List<AreaModel>> getAreas();
 
+    @POST("amenity")
+    Call<AmmenitityModel> newAmenity(@Body AmmenitityModel model);
 
+    @GET("amenity")
+    Call<List<AmmenitityModel>> getAmenities();
+
+    @POST("restauranttype")
+    Call<TypeModel> newType(@Body TypeModel model);
+
+    @GET("restauranttype")
+    Call<List<TypeModel>> getTypes();
+
+    @POST("payment")
+    Call<PaymentModel> newPaymentType(@Body PaymentModel model);
+
+    @GET("payment")
+    Call<List<PaymentModel>> getPaymentTypes();
 
 
 

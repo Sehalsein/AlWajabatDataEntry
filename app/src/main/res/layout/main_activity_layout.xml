@@ -16,6 +16,7 @@
         android:background="@drawable/round_thin"
         android:text="Add New Restaurant"
         android:textStyle="bold"
+        android:onClick="newRestaurant"
         android:textColor="@color/colorAccent" />
 
     <LinearLayout
@@ -47,6 +48,7 @@
             android:text="Restaurant Type"
             android:textColor="@color/colorAccent"
             android:layout_weight="1"
+            android:onClick="type"
             android:layout_margin="4dp"/>
 
     </LinearLayout>
@@ -68,6 +70,7 @@
             android:text="Payment Methods"
             android:textColor="@color/colorAccent"
             android:layout_weight="1"
+            android:onClick="payment"
             android:layout_margin="4dp"/>
 
         <Button
@@ -78,6 +81,7 @@
             android:text="Ammenities"
             android:textColor="@color/colorAccent"
             android:layout_weight="1"
+            android:onClick="amenity"
             android:layout_margin="4dp"/>
 
     </LinearLayout>
@@ -101,7 +105,6 @@
             android:layout_weight="1"
             android:layout_margin="4dp"
             android:onClick="cuisine"/>
-
 
     </LinearLayout>
 

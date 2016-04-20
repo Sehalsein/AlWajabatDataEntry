@@ -15,22 +15,35 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.alwajabat.alwajabatdataentry.api.APIAdapter;
+import com.alwajabat.alwajabatdataentry.api.callback.APIResponseCallback;
+import com.alwajabat.alwajabatdataentry.model.AreaModel;
 import com.alwajabat.alwajabatdataentry.model.PrimaryModel;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class PrimaryDetailsFragment extends Fragment implements View.OnClickListener, TextWatcher {
+import retrofit2.Response;
+
+
+public class PrimaryDetailsFragment extends Fragment implements View.OnClickListener, TextWatcher, AdapterView.OnItemSelectedListener {
 
     private Button vLocate;
     private Spinner vAreaName;
     private EditText vLongitude, vLatitude, vRestaurantName, vHotelName, vMallName, vAddress, vEmail, vMobile, vWebsite;
     private static final int PERMISSION_REQUEST_CODE = 1;
     private Validate validate;
+    private APIAdapter adapter;
+    private List<AreaModel> models =  new ArrayList<>();
+    private int itemSelected = -1;
 
 
 
@@ -39,6 +52,7 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
 
 
     public PrimaryDetailsFragment() {
+
     }
 
     public PrimaryModel getBasicDetails(){
@@ -71,6 +85,7 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
         vAreaName = (Spinner) layout.findViewById(R.id.spin_area_name);
         vWebsite = (EditText) layout.findViewById(R.id.et_website);
 
+        loadAreas();
 
         vRestaurantName.addTextChangedListener(this);
         vHotelName.addTextChangedListener(this);
@@ -84,7 +99,7 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
 
 
         vLocate.setOnClickListener(this);
-
+        vAreaName.setOnItemSelectedListener(this);
 
 
         return layout;
@@ -122,7 +137,7 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
             } else {
                 mRestaurantName = vRestaurantName.getText().toString();
                 model.setRestaurantName(vRestaurantName.getText().toString());
-                Log.e("ERRRR",vRestaurantName.getText().toString() );
+
 
             }
 
@@ -175,15 +190,14 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
             }
 
 
+            if (itemSelected < 0) {
+                vAreaName.setPrompt("Select Area");
 
-            //TODO Deal with area in primary fragment
-            //AREA NAME
-            /*if (isEmpty(vAreaName)) {
-                //  vAreaName.setError("Enter area name");
-                mAreaName = null;
             } else {
-                mAreaName = vMobile.getText().toString();
-            }*/
+                model.setArea(models.get(itemSelected));
+            }
+
+
 
 
         } catch (NullPointerException e) {
@@ -194,11 +208,12 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
                 mRestaurantName != null &&
                         mAddress != null &&
                         mEmail != null &&
-                        // mAreaName != null &&
+                        itemSelected >= 0 &&
                         mMobile != null
                 ) {
 
             validate.onSuccess();
+
         }
     }
 
@@ -294,6 +309,50 @@ public class PrimaryDetailsFragment extends Fragment implements View.OnClickList
 
     @Override
     public void afterTextChanged(Editable s) {
+
+    }
+
+    private void loadAreas(){
+
+
+        adapter = new APIAdapter();
+        adapter.getAreas(new APIResponseCallback() {
+            @Override
+            public void onSuccess(Response response) {
+                Response<List<AreaModel>> areas = response;
+                List<String> titles =  new ArrayList<String>();
+                models = areas.body();
+                for(AreaModel area : areas.body()){
+                    titles.add(area.getName());
+                }
+
+
+
+                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, titles);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                vAreaName.setAdapter(dataAdapter);
+                vAreaName.setSelected(false);
+
+
+            }
+
+            @Override
+            public void onFailure(String error) {
+                Log.e("Res Err", error);
+
+            }
+        });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        itemSelected = position;
+        Log.e("FAG", "onItemSelected: "+position);
+        validate();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }

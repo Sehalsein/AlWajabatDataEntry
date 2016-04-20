@@ -52,7 +52,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".CuisineActivity" />
-        <activity android:name=".AreaActivity"></activity>
+        <activity android:name=".AreaActivity" />
+        <activity android:name=".AmenityActivity" />
+        <activity android:name=".TypeActivity" />
+        <activity android:name=".PaymentActivity"></activity>
     </application>
 
 </manifest>

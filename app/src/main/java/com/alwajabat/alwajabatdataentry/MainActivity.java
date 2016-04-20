@@ -42,4 +42,20 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, AreaActivity.class));
     }
 
+    public void amenity(View view){
+        startActivity(new Intent(MainActivity.this, AmenityActivity.class));
+    }
+
+    public void type(View view){
+        startActivity(new Intent(MainActivity.this, TypeActivity.class));
+    }
+
+    public void newRestaurant(View view){
+        startActivity(new Intent(MainActivity.this, NewRestaurantActivity.class));
+    }
+
+    public void payment(View view){
+        startActivity(new Intent(MainActivity.this, PaymentActivity.class));
+    }
+
 }
